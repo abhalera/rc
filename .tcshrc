@@ -1,0 +1,7 @@
+# Source common aliases
+
+set autolist
+set autocomplete
+set filec
+set complete='enhance'
+source ~/.aliases

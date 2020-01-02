@@ -9,6 +9,15 @@ call plug#begin()
 " Plug 'dracula/vim', { 'commit': '147f389f4275cec4ef43ebc25e2011c57b45cc00' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+" Colorschemes
+Plug 'ayu-theme/ayu-vim'
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'morhetz/gruvbox'
+Plug 'arcticicestudio/nord-vim'
+Plug 'rakr/vim-one'
+Plug 'mhartington/oceanic-next'
+
 " Plug 'junegunn/goyo.vim'
 " Plug 'junegunn/limelight.vim'
 " Plug 'junegunn/seoul256.vim'
@@ -29,7 +38,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 if has("unix")
     Plug 'majutsushi/tagbar'
-    Plug 'ryanoasis/vim-devicons'
+    "Plug 'ryanoasis/vim-devicons'
 else
     if has("win32")
         echo "Windows OS detected. Not loading tagbar which does not work on Windows..."
@@ -91,40 +100,40 @@ set wrap breakindent
 set encoding=utf-8
 set number
 set title
-"
-" """ Plugin Configurations
-"
-" " NERDTree
-" let NERDTreeShowHidden=1
-" let g:NERDTreeDirArrowExpandable = '↠'
-" let g:NERDTreeDirArrowCollapsible = '↡'
-"
-" " Airline
-" let g:airline_powerline_fonts = 1
-" let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
-" let g:airline_section_warning = ''
-" "let g:airline#extensions#tabline#enabled = 1
-"
-" " Neovim :Terminal
-" tmap <Esc> <C-\><C-n>
-" tmap <C-w> <Esc><C-w>
-" "tmap <C-d> <Esc>:q<CR>
-" autocmd BufWinEnter,WinEnter term://* startinsert
-" autocmd BufLeave term://* stopinsert
-"
-" " Deoplete
-" let g:deoplete#enable_at_startup = 1
-" " Disable documentation window
-" set completeopt-=preview
-"
-" " Supertab
-" let g:SuperTabDefaultCompletionType = "<C-n>"
-"
-" " Ultisnips
-" let g:UltiSnipsExpandTrigger="<C-Space>"
-" let g:UltiSnipsJumpForwardTrigger="<Tab>"
-" let g:UltiSnipsJumpBackwardTrigger="<C-x>"
-"
+
+""" Plugin Configurations
+
+" NERDTree
+"let NERDTreeShowHidden=1
+let g:NERDTreeDirArrowExpandable = '↠'
+let g:NERDTreeDirArrowCollapsible = '↡'
+
+" Airline
+let g:airline_powerline_fonts = 1
+let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
+let g:airline_section_warning = ''
+let g:airline#extensions#tabline#enabled = 1
+
+" Neovim :Terminal
+tmap <Esc> <C-\><C-n>
+tmap <C-w> <Esc><C-w>
+tmap <C-d> <Esc>:q<CR>
+autocmd BufWinEnter,WinEnter term://* startinsert
+autocmd BufLeave term://* stopinsert
+
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+" Disable documentation window
+set completeopt-=preview
+
+" Supertab
+let g:SuperTabDefaultCompletionType = "<C-n>"
+
+" Ultisnips
+let g:UltiSnipsExpandTrigger="<C-Space>"
+let g:UltiSnipsJumpForwardTrigger="<Tab>"
+let g:UltiSnipsJumpBackwardTrigger="<C-x>"
+
 " " EasyAlign
 " xmap ga <Plug>(EasyAlign)
 " nmap ga <Plug>(EasyAlign)
@@ -159,22 +168,10 @@ set title
 "
 "                               """ Filetype-Specific Configurations
 
-" HTML, XML, Jinja
-" autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
-" autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2
-" autocmd FileType xml setlocal shiftwidth=2 tabstop=2 softtabstop=2
-" autocmd FileType htmldjango setlocal shiftwidth=2 tabstop=2 softtabstop=2
-" autocmd FileType htmldjango inoremap {{ {{  }}<left><left><left>
-" autocmd FileType htmldjango inoremap {% {%  %}<left><left><left>
-" autocmd FileType htmldjango inoremap {# {#  #}<left><left><left>
-"
-" " Markdown and Journal
-" autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
-" autocmd FileType journal setlocal shiftwidth=2 tabstop=2 softtabstop=2
-"
-" """ Custom Functions
-"
-" " Trim Whitespaces
+
+""" Custom Functions
+
+" Trim Whitespaces
 function! TrimWhitespace()
     let l:save = winsaveview()
     %s/\\\@<!\s\+$//e
@@ -201,9 +198,12 @@ nmap <silent> <leader><leader> :noh<CR>
 nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>
 nnoremap ,b :buffers *<CR>:b
-nmap <F2> :w<CR>
-imap <F2> <Esc>:w<CR>a
-map   <F8> :vertical wincmd f<CR>
+
+" Function Keys Mapping
+nmap     <F2> :w<CR>
+imap     <F2> <Esc>:w<CR>a
+map      <F8> :vertical wincmd f<CR>
+nnoremap <F12> :w<CR>:exe 'source '. stdpath('config'). '/init.vim'<CR>:PlugInstall<CR>
 nnoremap <space> za
 nnoremap j gj
 nnoremap k gk
@@ -225,3 +225,4 @@ nnoremap <Space> gt
 "map <F9> <Esc>:w<CR>:!/nfs/sc/disks/adl_media_par_02/amitvinx/projects/ErrorWarningApproval/bin/ErrorWarningApproval.py<CR>
 "xmap <leader>a gaip*
 "nmap <leader>a gaip*
+colorscheme gruvbox
