@@ -55,8 +55,8 @@ Plug 'ervandew/supertab'
 " Plug 'alvan/vim-closetag'
 " Plug 'tpope/vim-abolish'
 " Plug 'Yggdroot/indentLine'
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-" Plug 'junegunn/fzf.vim'
+ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+ Plug 'junegunn/fzf.vim'
 " Plug 'sheerun/vim-polyglot'
 " Plug 'chrisbra/Colorizer'
 " Plug 'heavenshell/vim-pydocstring'
@@ -100,6 +100,7 @@ set wrap breakindent
 set encoding=utf-8
 set number
 set title
+set cursorline
 
 """ Plugin Configurations
 
@@ -115,11 +116,23 @@ let g:airline_section_warning = ''
 let g:airline#extensions#tabline#enabled = 1
 
 " Neovim :Terminal
-tmap <Esc> <C-\><C-n>
+tnoremap <Esc> <C-\><C-n>
 tmap <C-w> <Esc><C-w>
 tmap <C-d> <Esc>:q<CR>
-autocmd BufWinEnter,WinEnter term://* startinsert
-autocmd BufLeave term://* stopinsert
+tnoremap <A-h> <C-\><C-N><C-w>h
+tnoremap <A-j> <C-\><C-N><C-w>j
+tnoremap <A-k> <C-\><C-N><C-w>k
+tnoremap <A-l> <C-\><C-N><C-w>l
+inoremap <A-h> <C-\><C-N><C-w>h
+inoremap <A-j> <C-\><C-N><C-w>j
+inoremap <A-k> <C-\><C-N><C-w>k
+inoremap <A-l> <C-\><C-N><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+"autocmd BufWinEnter,WinEnter term://* startinsert
+"autocmd BufLeave term://* stopinsert
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
@@ -146,25 +159,25 @@ let g:UltiSnipsJumpBackwardTrigger="<C-x>"
 " let g:tagbar_width = 30
 " let g:tagbar_iconchars = ['↠', '↡']
 "
-" " fzf-vim
-" let g:fzf_action = {
-"   \ 'ctrl-t': 'tab split',
-"     \ 'ctrl-s': 'split',
-"       \ 'ctrl-v': 'vsplit' }
-"       let g:fzf_colors =
-"       \ { 'fg':      ['fg', 'Normal'],
-"         \ 'bg':      ['bg', 'Normal'],
-"           \ 'hl':      ['fg', 'Comment'],
-"             \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-"               \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-"                 \ 'hl+':     ['fg', 'Statement'],
-"                   \ 'info':    ['fg', 'Type'],
-"                     \ 'border':  ['fg', 'Ignore'],
-"                       \ 'prompt':  ['fg', 'Character'],
-"                         \ 'pointer': ['fg', 'Exception'],
-"                           \ 'marker':  ['fg', 'Keyword'],
-"                             \ 'spinner': ['fg', 'Label'],
-"                               \ 'header':  ['fg', 'Comment'] }
+ " fzf-vim
+let g:fzf_action = {
+            \ 'ctrl-t': 'tab split',
+            \ 'ctrl-s': 'split',
+            \ 'ctrl-v': 'vsplit' }
+let g:fzf_colors = {
+            \ 'fg':      ['fg', 'Normal'],
+            \ 'bg':      ['bg', 'Normal'],
+            \ 'hl':      ['fg', 'Comment'],
+            \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+            \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+            \ 'hl+':     ['fg', 'Statement'],
+            \ 'info':    ['fg', 'Type'],
+            \ 'border':  ['fg', 'Ignore'],
+            \ 'prompt':  ['fg', 'Character'],
+            \ 'pointer': ['fg', 'Exception'],
+            \ 'marker':  ['fg', 'Keyword'],
+            \ 'spinner': ['fg', 'Label'],
+            \ 'header':  ['fg', 'Comment'] }
 "
 "                               """ Filetype-Specific Configurations
 
@@ -193,6 +206,8 @@ nmap <leader>enr :exe 'edit '. stdpath('config'). '/init.vim'<CR>
 nmap <leader>tws :call TrimWhitespace()<CR>
 nmap <leader>ss  <C-w>s<C-w>j:terminal<CR>
 nmap <leader>svs <C-w>v<C-w>l:terminal<CR>
+nmap <leader>f :Files<CR>
+nmap <leader>ee :Colors<CR>
 autocmd FileType python nmap <leader>x :0,$!python -m yapf<CR>
 nmap <silent> <leader><leader> :noh<CR>
 nmap <Tab> :bnext<CR>
