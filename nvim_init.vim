@@ -8,7 +8,7 @@ call plug#begin()
 " Aesthetics - Main
 " Plug 'dracula/vim', { 'commit': '147f389f4275cec4ef43ebc25e2011c57b45cc00' }
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline-themes'
 
 " Colorschemes
 Plug 'ayu-theme/ayu-vim'
@@ -50,7 +50,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
 Plug 'ervandew/supertab'
-" Plug 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 " Plug 'junegunn/vim-easy-align'
 " Plug 'alvan/vim-closetag'
 " Plug 'tpope/vim-abolish'
@@ -65,6 +65,7 @@ Plug 'ervandew/supertab'
 Plug 'honza/vim-snippets'
 " Plug 'metakirby5/codi.vim'
 " Plug 'dkarter/bullets.vim'
+Plug 'SkyLeach/pudb.vim'
 "
 " " Entertainment
 " "Plug 'ryanss/vim-hackernews'
@@ -101,6 +102,7 @@ set encoding=utf-8
 set number
 set title
 set cursorline
+set mouse=a
 
 """ Plugin Configurations
 
@@ -110,10 +112,10 @@ let g:NERDTreeDirArrowExpandable = '↠'
 let g:NERDTreeDirArrowCollapsible = '↡'
 
 " Airline
-let g:airline_powerline_fonts = 1
-let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
-let g:airline_section_warning = ''
-let g:airline#extensions#tabline#enabled = 1
+"let g:airline_powerline_fonts = 1
+"let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
+"let g:airline_section_warning = ''
+"let g:airline#extensions#tabline#enabled = 1
 
 " Neovim :Terminal
 tnoremap <Esc> <C-\><C-n>
@@ -229,6 +231,10 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <Space> gt
+" easy breakpoint python
+au FileType python map <silent> <leader>b ofrom pudb import set_trace; set_trace()<esc>
+au FileType python map <silent> <leader>B Ofrom pudb import set_trace; set_trace()<esc>
+
 
 """ Sort Later
 "nnoremap <leader>ev :vsp ~/.vimrc<CR>
