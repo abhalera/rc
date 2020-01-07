@@ -51,6 +51,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
 Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
+Plug 'vim-syntastic/syntastic'
 " Plug 'junegunn/vim-easy-align'
 " Plug 'alvan/vim-closetag'
 " Plug 'tpope/vim-abolish'
@@ -116,6 +117,16 @@ let g:NERDTreeDirArrowCollapsible = '↡'
 "let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
 "let g:airline_section_warning = ''
 "let g:airline#extensions#tabline#enabled = 1
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " Neovim :Terminal
 tnoremap <Esc> <C-\><C-n>
