@@ -140,6 +140,9 @@ nnoremap <A-l> <C-w>l
 let g:deoplete#enable_at_startup = 1
 " Disable documentation window
 set completeopt-=preview
+if has("win32")
+    let g:python3_host_prog = expand('c:\\python38\\python.exe')
+endif
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "<C-n>"
