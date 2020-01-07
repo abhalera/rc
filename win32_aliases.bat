@@ -1,0 +1,14 @@
+doskey vi=nvim $*
+doskey vim=nvim $*
+doskey v=nvim $*
+doskey n=nvim $*
+doskey g=nvim-qt $*
+doskey gv=nvim-qt $*
+doskey gvim=nvim-qt $*
+doskey ..=cd ..
+doskey ...=cd ..;..
+doskey ....=..;..;..
+doskey .....=..;..;..;..
+doskey ......=..;..;..;..;..
+doskey .......=..;..;..;..;..;..
+doskey ........=..;..;..;..;..;..;..
