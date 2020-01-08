@@ -5,3 +5,4 @@ set autocomplete
 set filec
 set complete='enhance'
 source ~/.aliases
+setenv PATH ${PATH}:.
