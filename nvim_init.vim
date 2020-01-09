@@ -45,6 +45,7 @@ else
     endif
 
 endif
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -104,6 +105,7 @@ set number
 set title
 set cursorline
 set mouse=a
+set tags=./tags;/
 
 """ Plugin Configurations
 
@@ -148,7 +150,6 @@ nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 "autocmd BufWinEnter,WinEnter term://* startinsert
 "autocmd BufLeave term://* stopinsert
-
 " Deoplete
 let g:deoplete#enable_at_startup = 1
 " Disable documentation window

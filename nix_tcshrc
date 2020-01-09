@@ -4,5 +4,6 @@ set autolist
 set autocomplete
 set filec
 set complete='enhance'
+setenv PATH ${PATH}:.:/usr/bin
+setenv LC_ALL C
 source ~/.aliases
-setenv PATH ${PATH}:.
