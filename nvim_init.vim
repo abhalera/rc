@@ -106,6 +106,7 @@ set title
 set cursorline
 set mouse=a
 set tags=./tags;/
+set isfname-=,
 
 """ Plugin Configurations
 

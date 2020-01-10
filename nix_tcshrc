@@ -7,3 +7,5 @@ set complete='enhance'
 setenv PATH ${PATH}:.:/usr/bin
 setenv LC_ALL C
 source ~/.aliases
+setenv LESS R
+setenv LESSCHARSET 'utf-8'
