@@ -18,27 +18,12 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'rakr/vim-one'
 Plug 'mhartington/oceanic-next'
 
-" Plug 'junegunn/goyo.vim'
-" Plug 'junegunn/limelight.vim'
-" Plug 'junegunn/seoul256.vim'
-" Plug 'junegunn/vim-journal'
-" Plug 'junegunn/rainbow_parentheses.vim'
-" Plug 'nightsense/forgotten'
-" Plug 'zaki/zazen'
-"
-" " Aethetics - Additional
-" Plug 'nightsense/nemo'
-" Plug 'yuttie/hydrangea-vim'
-" Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
-" Plug 'rhysd/vim-color-spring-night'
-"
 " " Functionalities
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 if has("unix")
     Plug 'majutsushi/tagbar'
-    "Plug 'ryanoasis/vim-devicons'
 else
     if has("win32")
         echo "Windows OS detected. Not loading tagbar which does not work on Windows..."
@@ -53,44 +38,34 @@ Plug 'zchee/deoplete-jedi'
 Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-syntastic/syntastic'
-" Plug 'junegunn/vim-easy-align'
-" Plug 'alvan/vim-closetag'
-" Plug 'tpope/vim-abolish'
-" Plug 'Yggdroot/indentLine'
- Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
- Plug 'junegunn/fzf.vim'
-" Plug 'sheerun/vim-polyglot'
-" Plug 'chrisbra/Colorizer'
-" Plug 'heavenshell/vim-pydocstring'
-" Plug 'vim-scripts/loremipsum'
-" Plug 'SirVer/ultisnips'
+Plug 'junegunn/vim-easy-align'
+Plug 'Yggdroot/indentLine'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'pixelneo/vim-python-docstring'
+Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-" Plug 'metakirby5/codi.vim'
-" Plug 'dkarter/bullets.vim'
+Plug 'metakirby5/codi.vim'
 Plug 'SkyLeach/pudb.vim'
-"
-" " Entertainment
-" "Plug 'ryanss/vim-hackernews'
-"
+
 call plug#end()
+"UltiSnips
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsJumpForwardTrigger='<c-b>'
+let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+
+" Bullets.vim
+let g:bullets_enabled_file_types = [
+    \ 'markdown',
+    \ 'text',
+    \ 'gitcommit',
+    \ 'scratch'
+    \]
+
 "
 " """ Python3 VirtualEnv
 " let g:python3_host_prog = expand('~/.config/nvim/env/bin/python')
-"
-" """ Coloring
-" syntax on
-" color dracula
-" highlight Pmenu guibg=white guifg=black gui=bold
-" highlight Comment gui=bold
-" highlight Normal gui=none
-" highlight NonText guibg=none
-"
-" " Opaque Background (Comment out to use terminal's profile)
-" set termguicolors
-"
-" " Transparent Background (For i3 and compton)
-" highlight Normal guibg=NONE ctermbg=NONE
-" highlight LineNr guibg=NONE ctermbg=NONE
 "
 " """ Other Configurations
 filetype plugin indent on
@@ -107,6 +82,7 @@ set cursorline
 set mouse=a
 set tags=./tags;/
 set isfname-=,
+set clipboard+=unnamedplus
 
 """ Plugin Configurations
 
@@ -114,12 +90,6 @@ set isfname-=,
 "let NERDTreeShowHidden=1
 let g:NERDTreeDirArrowExpandable = '↠'
 let g:NERDTreeDirArrowCollapsible = '↡'
-
-" Airline
-"let g:airline_powerline_fonts = 1
-"let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
-"let g:airline_section_warning = ''
-"let g:airline#extensions#tabline#enabled = 1
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -168,17 +138,17 @@ let g:UltiSnipsJumpForwardTrigger="<Tab>"
 let g:UltiSnipsJumpBackwardTrigger="<C-x>"
 
 " " EasyAlign
-" xmap ga <Plug>(EasyAlign)
-" nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+" indentLine
+let g:indentLine_char = '▏'
+let g:indentLine_color_gui = '#363949'
 "
-" " indentLine
-" let g:indentLine_char = '▏'
-" let g:indentLine_color_gui = '#363949'
-"
-" " TagBar
-" let g:tagbar_width = 30
-" let g:tagbar_iconchars = ['↠', '↡']
-"
+" TagBar
+let g:tagbar_width = 30
+let g:tagbar_iconchars = ['↠', '↡']
+
  " fzf-vim
 let g:fzf_action = {
             \ 'ctrl-t': 'tab split',
@@ -198,8 +168,6 @@ let g:fzf_colors = {
             \ 'marker':  ['fg', 'Keyword'],
             \ 'spinner': ['fg', 'Label'],
             \ 'header':  ['fg', 'Comment'] }
-"
-"                               """ Filetype-Specific Configurations
 
 
 """ Custom Functions
@@ -255,9 +223,6 @@ au FileType python map <silent> <leader>B Ofrom pudb import set_trace; set_trace
 
 
 """ Sort Later
-"nnoremap <leader>ev :vsp ~/.vimrc<CR>
-"nnoremap <leader>ec :vsp ~/.cshrc<CR>
-"nnoremap <leader>sv :source ~/.vimrc<CR>
 "map <F9> <Esc>:w<CR>:!'%:p'<CR>
 "map <F9>call Demo()<CR>
 "imap <F9> <Esc>:w<CR>:!expand('%:p')<CR>
