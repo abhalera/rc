@@ -1,3 +1,5 @@
+set PATH=c:\Users\40007688\.fzf\bin;D:\cmder\vendor\git-for-windows\cmd\;%PATH%
+set PATH=D:\neovim\bin;D:\Python38;D:\ctags;%PATH%
 doskey ls=dir $*
 doskey rm=del $*
 doskey cp=copy $*

@@ -65,7 +65,14 @@ let g:bullets_enabled_file_types = [
 
 "
 " """ Python3 VirtualEnv
-" let g:python3_host_prog = expand('~/.config/nvim/env/bin/python')
+let g:python3_host_prog = expand('~/.config/nvim/env/bin/python')
+if has("win32")
+    if filereadable('C:\\Python38\python.exe')
+        let g:python3_host_prog='C:\\Python38\python.exe'
+    else
+        let g:python3_host_prog = expand('D:\\python38\\python.exe')
+    endif
+endif
 "
 " """ Other Configurations
 filetype plugin indent on
@@ -125,9 +132,6 @@ nnoremap <A-l> <C-w>l
 let g:deoplete#enable_at_startup = 1
 " Disable documentation window
 set completeopt-=preview
-if has("win32")
-    let g:python3_host_prog = expand('c:\\python38\\python.exe')
-endif
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "<C-n>"
