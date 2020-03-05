@@ -1,5 +1,8 @@
-set PATH=c:\Users\40007688\.fzf\bin;D:\cmder\vendor\git-for-windows\cmd\;%PATH%
-set PATH=D:\neovim\bin;D:\Python38;D:\ctags;%PATH%
+set PATH=D:\fzf\bin;%PATH%
+set PATH=D:\cmder\vendor\git-for-windows\cmd;%PATH%
+set PATH=D:\neovim\bin;%PATH%
+set PATH=D:\Python38;%PATH%
+set PATH=D:\ctags;%PATH%
 doskey ls=dir $*
 doskey rm=del $*
 doskey cp=copy $*
@@ -18,4 +21,4 @@ doskey .....=cd..^&^&cd..^&^&cd..^&^&cd..
 doskey ......=cd..^&^&cd..^&^&cd..^&^&cd..^&^&cd..
 doskey .......=cd..^&^&cd..^&^&cd..^&^&cd..^&^&cd..^&^&cd..
 doskey ........=cd..^&^&cd..^&^&cd..^&^&cd..^&^&cd..^&^&cd..^&^&cd..
-doskey cdh=cd%homepath%
+doskey cdh=cd %homepath%
