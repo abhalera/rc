@@ -1,14 +1,8 @@
-"set runtimepath^=~/.vim runtimepath+=~/.vim/after
-"let &packpath = &runtimepath
-"source ~/.vimrc
-
 "" Vim-Plug
 call plug#begin()
 
 " Aesthetics - Main
-" Plug 'dracula/vim', { 'commit': '147f389f4275cec4ef43ebc25e2011c57b45cc00' }
 Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
 
 " Colorschemes
 Plug 'ayu-theme/ayu-vim'
@@ -33,8 +27,7 @@ endif
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
 Plug 'vim-syntastic/syntastic'
@@ -49,6 +42,71 @@ Plug 'metakirby5/codi.vim'
 Plug 'SkyLeach/pudb.vim'
 
 call plug#end()
+"COC
+" TextEdit might fail if hidden is not set.
+set hidden
+
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=yes
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+if has('patch8.1.1068')
+  " Use `complete_info` if your (Neo)Vim version supports it.
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+" Symbol renaming.
+nmap <leader>crn <Plug>(coc-rename)
+
+
 "UltiSnips
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger='<tab>'
@@ -108,7 +166,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_python_exec = 'python3'
-let g:syntastic_python_checkers = ['python']
+let g:syntastic_python_checkers = ['pylint']
 
 " Neovim :Terminal
 tnoremap <Esc> <C-\><C-n>
@@ -126,12 +184,6 @@ nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
-"autocmd BufWinEnter,WinEnter term://* startinsert
-"autocmd BufLeave term://* stopinsert
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-" Disable documentation window
-set completeopt-=preview
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "<C-n>"
@@ -146,7 +198,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " indentLine
-let g:indentLine_char = '▏'
+let g:indentLine_char = '|'
 let g:indentLine_color_gui = '#363949'
 "
 " TagBar
@@ -198,8 +250,10 @@ nmap <leader>enr :exe 'edit '. stdpath('config'). '/init.vim'<CR>
 nmap <leader>tws :call TrimWhitespace()<CR>
 nmap <leader>ss  <C-w>s<C-w>j:terminal<CR>
 nmap <leader>svs <C-w>v<C-w>l:terminal<CR>
+nmap <leader>gf :GFiles<CR>
 nmap <leader>f :Files<CR>
 nmap <leader>ee :Colors<CR>
+nmap <leader>bd :bd<CR>
 autocmd FileType python nmap <leader>x :0,$!python -m yapf<CR>
 nmap <silent> <leader><leader> :noh<CR>
 nmap <Tab> :bnext<CR>
@@ -207,8 +261,8 @@ nmap <S-Tab> :bprevious<CR>
 nnoremap ,b :buffers *<CR>:b
 
 " Function Keys Mapping
-nmap     <F2> :w<CR>
-imap     <F2> <Esc>:w<CR>a
+nmap     <F2> :call TrimWhitespace()<CR>:w!<CR>
+imap     <F2> <Esc>:call TrimWhitespace():w!<CR>a
 map      <F8> :vertical wincmd f<CR>
 nnoremap <F12> :w<CR>:exe 'source '. stdpath('config'). '/init.vim'<CR>:PlugInstall<CR>
 nnoremap <space> za
@@ -222,7 +276,6 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <Space> gt
 " easy breakpoint python
-au FileType python map <silent> <leader>b ofrom pudb import set_trace; set_trace()<esc>
 au FileType python map <silent> <leader>B Ofrom pudb import set_trace; set_trace()<esc>
 
 
